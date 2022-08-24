@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class PreferencesFormComponent implements OnInit {
 
   preferencesForm: FormGroup;
+  lat: number;
+  lng: number;
 
   constructor(
     private formBuilder: FormBuilder
@@ -19,6 +21,20 @@ export class PreferencesFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getUserCurrentLocation();
+  }
+
+  
+  getUserCurrentLocation(){
+    // figure out a way to stop calling getCurrentPosition service a million times
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+      });
+    } else {
+      console.log("User Not Allowed")
+    }
   }
 
 }
