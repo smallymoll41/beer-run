@@ -1,12 +1,13 @@
 <div class="form-container">
-        <form [formGroup]="preferencesForm">
+        <form [formGroup]="preferencesForm" (submit)="submit(preferencesForm)">
             <mat-form-field>
-                <input matInput formControlName="preferredRadius" pattern="^([^0-9]*)$" required
-                    placehold="Radius from start">
+                <input matInput formControlName="preferredRadius" pattern="^([^0-9]*)$"
+                    placeholder="Radius from start">
             </mat-form-field>
+            <mat-checkbox formControlName="openNow" #checkbox>Open Now</mat-checkbox>
         </form>
         <div class="button-container">
-            <button mat-raised-button>Submit</button>
+            <button mat-raised-button type="submit">Submit</button>
             <button mat-raised-button>Clear</button>
         </div>
 </div>

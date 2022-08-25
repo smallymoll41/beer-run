@@ -28,7 +28,7 @@ export class MapComponent implements OnInit {
     scrollwheel: false,
     disableDoubleClickZoom: true,
     maxZoom: 20,
-    minZoom: 4,
+    minZoom: 4
   };
 
   markerInfoContent = 'You Are Here!';
@@ -92,7 +92,7 @@ export class MapComponent implements OnInit {
     // use nearbysearch 
     // move API key to environment
 
-    const URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=40.4658266,-79.9419994&radius=1000&type=bar";
+    const URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=40.4658376,-79.9420127&radius=1000&type=bar";
 
     fetch(URL, {mode: "no-cors"}).then(data => {
       return data.json()
@@ -102,4 +102,5 @@ export class MapComponent implements OnInit {
       console.log(error);
     })
   }
+
 }

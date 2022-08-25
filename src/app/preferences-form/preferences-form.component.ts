@@ -16,7 +16,8 @@ export class PreferencesFormComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.preferencesForm = this.formBuilder.group({
-      preferredRadius: this.formBuilder.control(null)
+      preferredRadius: this.formBuilder.control(null),
+      openNow: this.formBuilder.control(false)
     })
    }
 
@@ -35,6 +36,15 @@ export class PreferencesFormComponent implements OnInit {
     } else {
       console.log("User Not Allowed")
     }
+  }
+
+  submit(form: FormGroup){
+    //fix this 
+    //fix validators
+  }
+
+  resetForm(){
+    //todo
   }
 
 }
