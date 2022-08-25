@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { GoogleMap } from '@angular/google-maps';
+import { Subscription } from 'rxjs';
+import { Preferences } from '../interfaces/preferences.interface';
 import { PreferencesFormComponent } from '../preferences-form/preferences-form.component';
+import { PrefFormService } from '../services/pref-form.service';
 
 @Component({
   selector: 'app-map',
@@ -34,7 +37,12 @@ export class MapComponent implements OnInit {
 
   markerInfoContent = 'You Are Here!';
 
-  constructor() { }
+  formChanged: Subscription;
+  radius = 0;
+
+  constructor(
+    private prefFormService: PrefFormService
+  ) { }
 
   ngOnInit() {
     
@@ -45,13 +53,16 @@ export class MapComponent implements OnInit {
         lng: position.coords.longitude,
       };
     });
+
+    this.formChanged = this.prefFormService.formChangedSubject.subscribe((formVals: Preferences) => {
+      this.radius = parseFloat(formVals.preferredRadius + "");
+      formVals.openNow;
+    });
   }
 
   ngAfterViewInit() {
     // have this here for now because some values were undefined when loaded on init
     this.getCurrentLocation();
-    this.getRadius();
-    this.getNearbyBars();
   }
 
   getCurrentLocation() {
@@ -88,20 +99,6 @@ export class MapComponent implements OnInit {
 
     radius = radiusInMiles * mileInMeters;
     return radius;
-  }
-
-
-  getNearbyBars(){
-    //fix cors error RIP
-    const nearbySearchUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=-33.8670522,151.1957362&radius=500&type=bar"
-  
-    fetch(nearbySearchUrl).then(data=> {
-      return data.json()
-    }).then(jsonData => {
-     console.log(jsonData.results)
-    }).catch(error=> {
-      console.log(error);
-    }) 
   }
 
 }

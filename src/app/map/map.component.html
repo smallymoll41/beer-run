@@ -1,10 +1,5 @@
 <google-map [center]="center">
-    <map-marker  
-        #marker="mapMarker"
-        [position]="mapCenter"
-        [options]="markerOptions" 
-        >
+    <map-marker #marker="mapMarker" [position]="mapCenter" [options]="markerOptions">
     </map-marker>
-    <map-circle [center]="mapCenter"
-              [radius]="getRadius()"></map-circle>
+    <map-circle [center]="mapCenter" [radius]="radius"></map-circle>
 </google-map>
