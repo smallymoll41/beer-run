@@ -93,16 +93,6 @@ export class MapComponent implements OnInit {
     );
   }
 
-  getRadius() {
-    //get radius from form
-    let radius;
-    let radiusInMiles: number = .1;
-    const mileInMeters = 1609.34;
-
-    radius = radiusInMiles * mileInMeters;
-    return radius;
-  }
-
   getNearbyBar() {
     //cors issue makin me do this
     const URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=40.465834,-79.9420495&radius=5000&type=bar";
