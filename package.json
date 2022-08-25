@@ -23,6 +23,7 @@
     "@angular/router": "^14.1.0",
     "@material/checkbox": "^14.0.0",
     "@types/googlemaps": "^3.43.3",
+    "bootstrap": "^5.2.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

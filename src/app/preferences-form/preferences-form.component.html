@@ -1,20 +1,15 @@
+<div>Find Bars Near You</div>
+<div> Your Location: {{lat}}, {{lng}}</div>
 <div class="form-container">
-        <form [formGroup]="preferencesForm" (submit)="submit(preferencesForm)">
-            <mat-form-field>
-                <input matInput formControlName="preferredRadius" pattern="^([^0-9]*)$"
-                    placeholder="Radius from start">
-            </mat-form-field>
-            <mat-checkbox formControlName="openNow" #checkbox>Open Now</mat-checkbox>
-        </form>
-        <div class="button-container">
-            <button mat-raised-button type="submit">Submit</button>
-            <button mat-raised-button>Clear</button>
-        </div>
-</div>
-
-
-<div>
-    {{lat}}
-
-    {{lng}}
+    <form [formGroup]="preferencesForm" (ngSubmit)="submit(preferencesForm)">
+        <mat-form-field>
+            <input matInput formControlName="preferredRadius" placeholder="Radius from start">
+            <mat-error *ngIf="preferencesForm.controls['preferredRadius'].errors?.pattern">Please enter a number</mat-error>
+        </mat-form-field>
+        <mat-checkbox formControlName="openNow" #checkbox>Open Now</mat-checkbox>
+    </form>
+    <div class="button-container">
+        <button type="submit" mat-raised-button mat-button [disabled]="!preferencesForm.valid">Search</button>
+        <button mat-raised-button>Clear</button>
+    </div>
 </div>

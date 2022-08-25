@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Preferences } from '../interfaces/preferences.interface';
 
 @Component({
   selector: 'app-preferences-form',
@@ -16,7 +17,7 @@ export class PreferencesFormComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.preferencesForm = this.formBuilder.group({
-      preferredRadius: this.formBuilder.control(null),
+      preferredRadius: this.formBuilder.control("", Validators.pattern("^[0-9]*$")),
       openNow: this.formBuilder.control(false)
     })
    }
@@ -25,7 +26,6 @@ export class PreferencesFormComponent implements OnInit {
     this.getUserCurrentLocation();
   }
 
-  
   getUserCurrentLocation(){
     // figure out a way to stop calling getCurrentPosition service a million times
     if (navigator.geolocation) {
@@ -39,12 +39,21 @@ export class PreferencesFormComponent implements OnInit {
   }
 
   submit(form: FormGroup){
-    //fix this 
-    //fix validators
+    debugger;
+    const prefs: Preferences = {
+      preferredRadius: form.value.preferredRadius,
+      openNow: form.value.openNow
+    }
+    debugger;
+    console.log(prefs)
   }
 
   resetForm(){
     //todo
+  }
+
+  reverseGeocode(){
+
   }
 
 }
