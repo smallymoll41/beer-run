@@ -93,7 +93,7 @@ export class MapComponent implements OnInit {
 
   getNearbyBars(){
     //fix cors error RIP
-    const nearbySearchUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=-33.8670522,151.1957362&radius=500&type=bar"
+    const nearbySearchUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=-33.8670522,151.1957362&radius=500&type=bar"
   
     fetch(nearbySearchUrl).then(data=> {
       return data.json()

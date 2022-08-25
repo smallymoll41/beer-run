@@ -1,5 +1,5 @@
-<div>Find Bars Near You</div>
-<div> Your Location: {{lat}}, {{lng}}</div>
+<div class="form-description">Find Bars Near You</div>
+<div class="coordinates"> Your Location: {{lat}}, {{lng}}</div>
 <div class="form-container">
     <form [formGroup]="preferencesForm" (submit)="submit(preferencesForm)">
         <mat-form-field>
@@ -9,8 +9,8 @@
         <mat-checkbox formControlName="openNow" #checkbox>Open Now</mat-checkbox>
     
         <div class="button-container">
-            <button type="submit" mat-raised-button mat-button [disabled]="!preferencesForm.valid">Search</button>
-            <button mat-raised-button>Clear</button>
+            <button class="submit-button" type="submit" mat-raised-button mat-button [disabled]="!preferencesForm.valid">Search</button>
+            <button class="reset-button" mat-raised-button>Clear</button>
         </div>
     </form>
     
