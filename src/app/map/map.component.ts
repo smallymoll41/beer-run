@@ -45,7 +45,7 @@ export class MapComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     // upon landing, center map on user's current location
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
@@ -58,6 +58,8 @@ export class MapComponent implements OnInit {
       this.radius = parseFloat(formVals.preferredRadius + "");
       formVals.openNow;
     });
+
+    this.getNearbyBar();
   }
 
   ngAfterViewInit() {
@@ -99,6 +101,19 @@ export class MapComponent implements OnInit {
 
     radius = radiusInMiles * mileInMeters;
     return radius;
+  }
+
+  getNearbyBar() {
+    //cors issue makin me do this
+    const URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=40.465834,-79.9420495&radius=5000&type=bar";
+
+    fetch(URL).then(data => {
+      return data.json()
+    }).then(jsonData => {
+      console.log(jsonData.results)
+    }).catch(error => {
+      console.log(error);
+    })
   }
 
 }

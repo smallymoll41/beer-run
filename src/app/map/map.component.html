@@ -1,5 +1,11 @@
 <google-map [center]="center">
-    <map-marker #marker="mapMarker" [position]="mapCenter" [options]="markerOptions">
+    <map-marker #marker="mapMarker" [position]="mapCenter" [options]="markerOptions" [style]="">
     </map-marker>
+    <map-marker #markerElem
+    *ngFor="let marker of markers"
+    [position]="marker.position"
+    [label]="marker.label"
+    [title]="marker.title"
+    [options]="marker.options"></map-marker>
     <map-circle [center]="mapCenter" [radius]="radius"></map-circle>
 </google-map>

@@ -1,0 +1,7 @@
+{
+    "/maps/api/place/nearbysearch/json": {
+        "target": "https://maps.googleapis.com/maps/api/place/nearbysearch/json",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}
