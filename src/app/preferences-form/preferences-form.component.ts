@@ -50,7 +50,7 @@ export class PreferencesFormComponent implements OnInit {
   }
 
   resetForm(){
-    //todo
+    this.preferencesForm.reset();
   }
 
   reverseGeocode(){

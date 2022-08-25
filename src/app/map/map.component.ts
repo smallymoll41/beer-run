@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { GoogleMap } from '@angular/google-maps';
 import { Subscription } from 'rxjs';
 import { Preferences } from '../interfaces/preferences.interface';
+import { SearchResponse } from '../interfaces/search.response.interface';
 import { PreferencesFormComponent } from '../preferences-form/preferences-form.component';
 import { PrefFormService } from '../services/pref-form.service';
 
@@ -15,7 +16,6 @@ export class MapComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
 
   center: google.maps.LatLngLiteral;
-  markers = [] as any;
   lat: number;
   lng: number;
 
@@ -24,21 +24,23 @@ export class MapComponent implements OnInit {
     animation: google.maps.Animation.DROP,
   };
 
-  mapZoom = 12;
+  mapZoom = 8;
   mapCenter: google.maps.LatLng;
   mapOptions: google.maps.MapOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     zoomControl: true,
     scrollwheel: false,
-    disableDoubleClickZoom: true,
-    maxZoom: 20,
-    minZoom: 4
-  };
+    disableDoubleClickZoom: true
+    // styles: [
 
-  markerInfoContent = 'You Are Here!';
+    // ]
+  };
 
   formChanged: Subscription;
   radius = 0;
+  metersToMilesMultiplier = 1609.34;
+
+  markers: google.maps.LatLng[];
 
   constructor(
     private prefFormService: PrefFormService
@@ -55,20 +57,20 @@ export class MapComponent implements OnInit {
     });
 
     this.formChanged = this.prefFormService.formChangedSubject.subscribe((formVals: Preferences) => {
-      this.radius = parseFloat(formVals.preferredRadius + "");
+      //was throwing error so I had to make it a string then parse 
+      this.radius = parseFloat(formVals.preferredRadius * this.metersToMilesMultiplier + "");
       formVals.openNow;
       this.getNearbyBar(this.radius, formVals.openNow, this.center);
     });
+    this.markers = [];
   }
 
   ngAfterViewInit() {
-    // have this here for now because some values were undefined when loaded on init
     this.getCurrentLocation();
   }
 
   getCurrentLocation() {
     //use current position to create marker
-    //may look for alternative option since this is kinda repetitive 
     navigator.geolocation.getCurrentPosition(
       (position: GeolocationPosition) => {
 
@@ -79,11 +81,6 @@ export class MapComponent implements OnInit {
 
         this.mapCenter = new google.maps.LatLng(point);
         this.map.panTo(point);
-
-        this.markerOptions = {
-          draggable: false,
-          animation: google.maps.Animation.DROP,
-        };
       },
       (error) => {
         //add actual error message
@@ -92,29 +89,29 @@ export class MapComponent implements OnInit {
     );
   }
 
-  getNearbyBar(radius: number, openNow: boolean, center:any) {
+  getNearbyBar(radius: number, openNow: boolean, center: any) {
 
     let latty = center.lat.toString();
     let longy = center.lng.toString();
 
     const happyUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=" + latty + "," + longy + "&radius=" + radius + "&type=bar";
     if (openNow) {
-      const URL = happyUrl + "&openNow=true";
-
+      const URL = happyUrl + "&opennow";
       fetch(URL).then(data => {
         return data.json()
       }).then(jsonData => {
-        console.log(jsonData.results)
+        this.createMarkersFromJson(jsonData.results);
+        console.log(jsonData.results);
       }).catch(error => {
         console.log(error);
       })
     } else {
       const URL = happyUrl;
-
       fetch(URL).then(data => {
         return data.json()
       }).then(jsonData => {
-        console.log(jsonData.results)
+        this.createMarkersFromJson(jsonData.results);
+        console.log(jsonData.results);
       }).catch(error => {
         console.log(error);
       })
@@ -122,4 +119,22 @@ export class MapComponent implements OnInit {
 
   }
 
+  createMarkersFromJson(results: SearchResponse[]) {
+    results.map(obj => {
+      const point: google.maps.LatLngLiteral = {
+        lat: obj.geometry.location.lat,
+        lng: obj.geometry.location.lng
+      };
+      const currentPoint =  new google.maps.LatLng(point);
+      this.markers.push(currentPoint);
+    });
+  }
+
 }
+
+// const point: google.maps.LatLngLiteral = {
+//   lat: position.coords.latitude,
+//   lng: position.coords.longitude,
+// };
+
+// this.mapCenter = new google.maps.LatLng(point);

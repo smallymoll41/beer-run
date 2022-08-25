@@ -3,14 +3,14 @@
 <div class="form-container">
     <form [formGroup]="preferencesForm" (submit)="submit(preferencesForm, $event)">
         <mat-form-field>
-            <input matInput formControlName="preferredRadius" placeholder="Radius from start">
+            <input matInput formControlName="preferredRadius" placeholder="Miles from start">
             <mat-error *ngIf="preferencesForm.controls['preferredRadius'].errors?.pattern">Please enter a number</mat-error>
         </mat-form-field>
         <mat-checkbox formControlName="openNow" #checkbox>Open Now</mat-checkbox>
     
         <div class="button-container">
             <button class="submit-button" type="submit" mat-raised-button mat-button [disabled]="!preferencesForm.valid">Search</button>
-            <button class="reset-button" mat-raised-button>Clear</button>
+            <button (click)="resetForm()" class="reset-button" mat-raised-button>Clear</button>
         </div>
     </form>
 </div>
