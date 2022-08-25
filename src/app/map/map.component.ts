@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { GoogleMap } from '@angular/google-maps';
+import { PreferencesFormComponent } from '../preferences-form/preferences-form.component';
 
 @Component({
   selector: 'app-map',
@@ -7,7 +9,6 @@ import { GoogleMap } from '@angular/google-maps';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
-
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
 
   center: google.maps.LatLngLiteral;
@@ -36,6 +37,7 @@ export class MapComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
     // upon landing, center map on user's current location
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
@@ -88,19 +90,18 @@ export class MapComponent implements OnInit {
     return radius;
   }
 
-  getNearbyBars() {
-    // use nearbysearch 
-    // move API key to environment
 
-    const URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=40.4658376,-79.9420127&radius=1000&type=bar";
-
-    fetch(URL, {mode: "no-cors"}).then(data => {
+  getNearbyBars(){
+    //fix cors error RIP
+    const nearbySearchUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=-33.8670522,151.1957362&radius=500&type=bar"
+  
+    fetch(nearbySearchUrl).then(data=> {
       return data.json()
     }).then(jsonData => {
-      console.log(jsonData.results)
-    }).catch(error => {
+     console.log(jsonData.results)
+    }).catch(error=> {
       console.log(error);
-    })
+    }) 
   }
 
 }

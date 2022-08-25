@@ -39,13 +39,12 @@ export class PreferencesFormComponent implements OnInit {
   }
 
   submit(form: FormGroup){
-    debugger;
     const prefs: Preferences = {
       preferredRadius: form.value.preferredRadius,
       openNow: form.value.openNow
     }
-    debugger;
-    console.log(prefs)
+    console.log(prefs);
+
   }
 
   resetForm(){
@@ -55,5 +54,6 @@ export class PreferencesFormComponent implements OnInit {
   reverseGeocode(){
 
   }
+
 
 }
