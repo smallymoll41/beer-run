@@ -57,9 +57,8 @@ export class MapComponent implements OnInit {
     this.formChanged = this.prefFormService.formChangedSubject.subscribe((formVals: Preferences) => {
       this.radius = parseFloat(formVals.preferredRadius + "");
       formVals.openNow;
+      this.getNearbyBar(this.radius, formVals.openNow, this.center);
     });
-
-    this.getNearbyBar();
   }
 
   ngAfterViewInit() {
@@ -93,17 +92,34 @@ export class MapComponent implements OnInit {
     );
   }
 
-  getNearbyBar() {
-    //cors issue makin me do this
-    const URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=40.465834,-79.9420495&radius=5000&type=bar";
+  getNearbyBar(radius: number, openNow: boolean, center:any) {
 
-    fetch(URL).then(data => {
-      return data.json()
-    }).then(jsonData => {
-      console.log(jsonData.results)
-    }).catch(error => {
-      console.log(error);
-    })
+    let latty = center.lat.toString();
+    let longy = center.lng.toString();
+
+    const happyUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=" + latty + "," + longy + "&radius=" + radius + "&type=bar";
+    if (openNow) {
+      const URL = happyUrl + "&openNow=true";
+
+      fetch(URL).then(data => {
+        return data.json()
+      }).then(jsonData => {
+        console.log(jsonData.results)
+      }).catch(error => {
+        console.log(error);
+      })
+    } else {
+      const URL = happyUrl;
+
+      fetch(URL).then(data => {
+        return data.json()
+      }).then(jsonData => {
+        console.log(jsonData.results)
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+
   }
 
 }
