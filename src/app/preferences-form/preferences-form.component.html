@@ -1,12 +1,14 @@
 <div class="form-container">
-    <mat-card>
         <form [formGroup]="preferencesForm">
             <mat-form-field>
                 <input matInput formControlName="preferredRadius" pattern="^([^0-9]*)$" required
                     placehold="Radius from start">
             </mat-form-field>
         </form>
-    </mat-card>
+        <div class="button-container">
+            <button mat-raised-button>Submit</button>
+            <button mat-raised-button>Clear</button>
+        </div>
 </div>
 
 

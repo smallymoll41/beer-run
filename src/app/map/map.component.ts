@@ -31,7 +31,7 @@ export class MapComponent implements OnInit {
     minZoom: 4,
   };
 
-  markerInfoContent = '';
+  markerInfoContent = 'You Are Here!';
 
   constructor() { }
 
@@ -48,6 +48,8 @@ export class MapComponent implements OnInit {
   ngAfterViewInit() {
     // have this here for now because some values were undefined when loaded on init
     this.getCurrentLocation();
+    this.getRadius();
+    this.getNearbyBars();
   }
 
   getCurrentLocation() {
@@ -64,8 +66,6 @@ export class MapComponent implements OnInit {
         this.mapCenter = new google.maps.LatLng(point);
         this.map.panTo(point);
 
-        this.markerInfoContent = "I'm here!";
-
         this.markerOptions = {
           draggable: false,
           animation: google.maps.Animation.DROP,
@@ -78,5 +78,28 @@ export class MapComponent implements OnInit {
     );
   }
 
+  getRadius() {
+    //get radius from form
+    let radius;
+    let radiusInMiles: number = .1;
+    const mileInMeters = 1609.34;
 
+    radius = radiusInMiles * mileInMeters;
+    return radius;
+  }
+
+  getNearbyBars() {
+    // use nearbysearch 
+    // move API key to environment
+
+    const URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=40.4658266,-79.9419994&radius=1000&type=bar";
+
+    fetch(URL, {mode: "no-cors"}).then(data => {
+      return data.json()
+    }).then(jsonData => {
+      console.log(jsonData.results)
+    }).catch(error => {
+      console.log(error);
+    })
+  }
 }
