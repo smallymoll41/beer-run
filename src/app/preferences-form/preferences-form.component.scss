@@ -18,6 +18,10 @@ form {
     .mat-form-field-appearance-outline .mat-form-field-outline {
         color: white;
     }
+
+    .checkbox input {
+        float: right;
+    }
 }
 
 .button-container {

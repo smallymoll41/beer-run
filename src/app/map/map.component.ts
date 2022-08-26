@@ -32,9 +32,6 @@ export class MapComponent implements OnInit {
     zoomControl: true,
     scrollwheel: false,
     disableDoubleClickZoom: true
-    // styles: [
-
-    // ]
   };
 
   formChanged: Subscription;
@@ -71,7 +68,6 @@ export class MapComponent implements OnInit {
   }
 
   getCurrentLocation() {
-    //use current position to create marker
     navigator.geolocation.getCurrentPosition(
       (position: GeolocationPosition) => {
 
