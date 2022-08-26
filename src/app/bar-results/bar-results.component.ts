@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { PrefFormService } from '../services/pref-form.service';
 
 @Component({
   selector: 'app-bar-results',
@@ -17,12 +15,10 @@ export class BarResultsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.barResults);
     this.refresh();
   }
   
   ngDoCheck(){
-    console.log(this.barResults);
     this.refresh();
   }
 
@@ -34,7 +30,6 @@ export class BarResultsComponent implements OnInit {
     } else {
       this.showContainer = false;
     }
-    console.log(this.bars);
   }
 
 }

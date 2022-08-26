@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Preferences } from '../interfaces/preferences.interface';
-import { MapComponent } from '../map/map.component';
 import { PrefFormService } from '../services/pref-form.service';
 
 @Component({
@@ -30,7 +29,6 @@ export class PreferencesFormComponent implements OnInit {
   }
 
   getUserCurrentLocation(){
-    // figure out a way to stop calling getCurrentPosition service a million times
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.lat = position.coords.latitude;
@@ -52,10 +50,5 @@ export class PreferencesFormComponent implements OnInit {
   resetForm(){
     this.preferencesForm.reset();
   }
-
-  reverseGeocode(){
-
-  }
-
 
 }
