@@ -9,6 +9,9 @@
 </div>
 
 <div class="comp-container">
-  <app-preferences-form></app-preferences-form>
-  <app-map></app-map>
+  <div class="form-and-results-container">
+    <app-preferences-form></app-preferences-form>
+    <app-bar-results [barResults]="barResults"></app-bar-results>
+  </div>
+  <app-map (emitter)="send($event)"></app-map>
 </div>

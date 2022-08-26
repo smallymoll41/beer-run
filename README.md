@@ -1,27 +1,33 @@
-# BeerRun
+## MUST CREATE CHROME.EXE TO DISABLE SECURITY BEFORE RUNNING APPLICATION 
+**1) Create a new Chrome shortcut (save to desktop or anywhere easily accesible)**
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+**2) Right-click on shortcut, select "Shortcut" tab if not already selected**
 
-## Development server
+**3) Append the following to the "Target" field**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+    --disable-web-security --user-data-dir="D:/Chrome"
 
-## Code scaffolding
+**4) New "Target" should look something like this:**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    "C:\Program Files\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="D:/Chrome"
+**5) Close all instances of chrome**
 
-## Build
+**6) Open new Chrome shortcut to load application**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Wishlist/Acknowledged Flaws: 
+    -organize variables
+    -make mobile friendly (map specifically) 
+    -font is bad
+    -change map style
+    -replace scss default theme
+    -give labels to form controls
+    -zoom out?
+    -change color of radius
+    -make global styles
+    -make github private (API key public is not a production solution)
+    -make function of geolocation service call
+    -add window for markers
+    -clean up nearby search call
+    -reverse geocode lat and lng to readble address
+    -create reducer for form values
+    -pagination for results

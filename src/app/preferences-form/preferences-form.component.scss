@@ -8,12 +8,13 @@
 
 .coordinates {
     padding-bottom: 20px;
+    color: #897357;
 }
 
 form {
     display: flex;
     flex-direction: column;
-
+    color: #897357;
     /* Border */
     .mat-form-field-appearance-outline .mat-form-field-outline {
         color: white;
@@ -23,19 +24,6 @@ form {
         float: right;
     }
 
-    // .slider-container {
-    //     display: flex;
-    //     flex-direction: column;
-    //     margin-top: 15px;
-    //     mat-label {
-    //         margin-bottom: 5px;
-    //     }
-    //     .price-options {
-    //         display: flex;
-    //         flex-direction: row;
-    //         justify-content: space-between;
-    //     }
-    // }
 }
 
 .button-container {

@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { GoogleMap } from '@angular/google-maps';
+import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { Subscription } from 'rxjs';
 import { Preferences } from '../interfaces/preferences.interface';
 import { SearchResponse } from '../interfaces/search.response.interface';
@@ -14,6 +14,9 @@ import { PrefFormService } from '../services/pref-form.service';
 })
 export class MapComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
+  @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow;
+
+  @Output() emitter:EventEmitter<string[]> = new EventEmitter<string[]>();
 
   center: google.maps.LatLngLiteral;
   lat: number;
@@ -22,8 +25,12 @@ export class MapComponent implements OnInit {
   markerOptions: google.maps.MarkerOptions = {
     draggable: false,
     animation: google.maps.Animation.DROP,
-    // icon = ""
+    icon: "assets/yellow-marker.png"
   };
+
+  barMarkerOptions: google.maps.MarkerOptions = {
+    icon: "assets/bar-icon.png"
+  }
 
   mapZoom = 8;
   mapCenter: google.maps.LatLng;
@@ -39,6 +46,8 @@ export class MapComponent implements OnInit {
   metersToMilesMultiplier = 1609.34;
 
   markers: google.maps.LatLng[];
+  barNames: string[] = [];
+  emptyBar: string[] = [];
 
   constructor(
     private prefFormService: PrefFormService
@@ -58,6 +67,8 @@ export class MapComponent implements OnInit {
       //was throwing error so I had to make it a string then parse
       if (formVals.preferredRadius === null) {
         this.resetMarkers();
+        this.emptyBar = []
+        this.emitBarResultsChange(this.emptyBar);
       } 
       this.radius = parseFloat(formVals.preferredRadius * this.metersToMilesMultiplier + "");
       formVals.openNow;
@@ -125,20 +136,24 @@ export class MapComponent implements OnInit {
         lat: obj.geometry.location.lat,
         lng: obj.geometry.location.lng
       };
+      const name = obj.name.toString();
+      console.log(name);
       const currentPoint =  new google.maps.LatLng(point);
       this.markers.push(currentPoint);
+      this.barNames.push(name);
     });
+    console.log(this.barNames);
+    this.emitBarResultsChange(this.barNames);
   }
 
   resetMarkers(){
     this.markers = [];
+    this.barNames = [];
   }
 
+  emitBarResultsChange(barNames: string[] | undefined){
+    this.emitter.emit(barNames);
+  }
+
+
 }
-
-// const point: google.maps.LatLngLiteral = {
-//   lat: position.coords.latitude,
-//   lng: position.coords.longitude,
-// };
-
-// this.mapCenter = new google.maps.LatLng(point);

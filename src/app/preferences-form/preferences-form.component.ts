@@ -10,27 +10,6 @@ import { PrefFormService } from '../services/pref-form.service';
   styleUrls: ['./preferences-form.component.scss']
 })
 export class PreferencesFormComponent implements OnInit {
-  /* TODO: (need to prioritize)
-      -add slider to form
-      -make mobile friendly (map specifically) 
-      -font is bad
-      -colors could be rearranged
-      -change color of markers
-      -change map style
-      -replace scss default theme
-      -give labels to form controls
-      -remove markers on clear
-      -zoom out?
-      -change color of radius
-      -make global styles
-      -make github private (API key public is not a production solution)
-      -make function of geolocation service call
-      -add window for markers
-      -clean up nearby search call
-      -reverse geocode lat and lng to readble address
-      -create reducer for form values
-  */ 
-  
 
   preferencesForm: FormGroup;
   lat: number;

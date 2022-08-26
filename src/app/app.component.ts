@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'beer-run';
+
+  barResults: string[];
+  send(barResults: any){
+    this.barResults = barResults;
+  }
 }

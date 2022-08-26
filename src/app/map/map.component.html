@@ -1,6 +1,12 @@
 <google-map [center]="center">
     <map-marker [position]="mapCenter" [options]="markerOptions" [style]="">
     </map-marker>
-    <map-marker *ngFor="let marker of markers" [position]="marker"></map-marker>
+    <map-marker #markerElem *ngFor="let marker of markers" [position]="marker" [options]="barMarkerOptions"></map-marker>
     <map-circle [center]="mapCenter" [radius]="radius"></map-circle>
 </google-map>
+
+<!-- <div *ngIf="barNames.length">
+    <div *ngFor="let bar of barNames">
+        {{bar}}
+    </div>
+</div> -->

@@ -1,0 +1,10 @@
+<div *ngIf="showContainer" class="results-container">
+    <div class="results-title">
+        Top Results
+    </div>
+    <ul>
+        <li *ngFor="let bar of bars| slice:0:10;">
+            {{bar}}
+        </li>
+    </ul>
+</div>

@@ -8,12 +8,14 @@ import { NgMaterialModule } from './ng-material/ng-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from './map/map.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { BarResultsComponent } from './bar-results/bar-results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PreferencesFormComponent,
-    MapComponent
+    MapComponent,
+    BarResultsComponent
   ],
   imports: [
     BrowserModule,
