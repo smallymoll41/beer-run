@@ -22,6 +22,7 @@ export class MapComponent implements OnInit {
   markerOptions: google.maps.MarkerOptions = {
     draggable: false,
     animation: google.maps.Animation.DROP,
+    // icon = ""
   };
 
   mapZoom = 8;

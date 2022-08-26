@@ -51,6 +51,7 @@ export class PreferencesFormComponent implements OnInit {
 
   resetForm(){
     this.preferencesForm.reset();
+    //reset markers here
   }
 
   reverseGeocode(){
