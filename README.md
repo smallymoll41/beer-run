@@ -15,19 +15,17 @@
 **6) Open new Chrome shortcut to load application**
 
 ## Wishlist/Acknowledged Flaws: 
-    -organize variables
+    -lazy loading
     -make mobile friendly (map specifically) 
     -font is bad
     -change map style
     -replace scss default theme
-    -give labels to form controls
     -zoom out?
     -change color of radius
     -make global styles
-    -make github private (API key public is not a production solution)
+    -API key public is not a production solution (can't access environment variable in index.html)
     -make function of geolocation service call
     -add window for markers
-    -clean up nearby search call
-    -reverse geocode lat and lng to readble address
+    -reverse geocode lat and lng to readable address
     -create reducer for form values
     -pagination for results
