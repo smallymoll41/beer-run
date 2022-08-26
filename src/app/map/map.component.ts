@@ -58,7 +58,7 @@ export class MapComponent implements OnInit {
       //was throwing error so I had to make it a string then parse
       if (formVals.preferredRadius === null) {
         this.resetMarkers();
-      } 
+      }
       this.radius = parseFloat(formVals.preferredRadius * this.metersToMilesMultiplier + "");
       formVals.openNow;
       this.getNearbyBar(this.radius, formVals.openNow, this.center);
@@ -142,3 +142,4 @@ export class MapComponent implements OnInit {
 // };
 
 // this.mapCenter = new google.maps.LatLng(point);
+

@@ -12,7 +12,7 @@ import { PrefFormService } from '../services/pref-form.service';
 export class PreferencesFormComponent implements OnInit {
   /* TODO: (need to prioritize)
       -add slider to form
-      -make mobile friendly (map specifically) 
+      -make mobile friendly (map specifically)
       -font is bad
       -colors could be rearranged
       -change color of markers
@@ -29,8 +29,8 @@ export class PreferencesFormComponent implements OnInit {
       -clean up nearby search call
       -reverse geocode lat and lng to readble address
       -create reducer for form values
-  */ 
-  
+  */
+
 
   preferencesForm: FormGroup;
   lat: number;
@@ -80,3 +80,5 @@ export class PreferencesFormComponent implements OnInit {
 
 
 }
+
+
