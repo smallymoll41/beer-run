@@ -103,6 +103,7 @@ export class MapComponent implements OnInit {
     let latty = center.lat.toString();
     let longy = center.lng.toString();
 
+    // Not a production solution (secrets should not be exposed in source code)
     const happyUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCbOt9xUH2lyaTEKjdDOVK0BJ1dROGVxPY&location=" + latty + "," + longy + "&radius=" + radius + "&type=bar";
     let URL = openNow ? happyUrl + "&opennow" : happyUrl;
     console.log(URL);
