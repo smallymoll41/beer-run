@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Preferences } from '../interfaces/preferences.interface';
+import { MapComponent } from '../map/map.component';
 import { PrefFormService } from '../services/pref-form.service';
 
 @Component({
@@ -9,7 +10,6 @@ import { PrefFormService } from '../services/pref-form.service';
   styleUrls: ['./preferences-form.component.scss']
 })
 export class PreferencesFormComponent implements OnInit {
-
   /* TODO: (need to prioritize)
       -add slider to form
       -make mobile friendly (map specifically) 
@@ -28,6 +28,7 @@ export class PreferencesFormComponent implements OnInit {
       -add window for markers
       -clean up nearby search call
       -reverse geocode lat and lng to readble address
+      -create reducer for form values
   */ 
   
 
@@ -66,13 +67,11 @@ export class PreferencesFormComponent implements OnInit {
       preferredRadius: form.value.preferredRadius,
       openNow: form.value.openNow
     }
-    console.log(prefs);
     this.prefFormService.formChangedSubject.next(prefs);
   }
 
   resetForm(){
     this.preferencesForm.reset();
-    //reset markers here
   }
 
   reverseGeocode(){

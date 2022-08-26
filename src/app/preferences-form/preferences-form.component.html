@@ -7,14 +7,23 @@
             <mat-error *ngIf="preferencesForm.controls['preferredRadius'].errors?.pattern">Please enter a number</mat-error>
         </mat-form-field>
         <mat-checkbox formControlName="openNow" #checkbox class="checkbox">Open Now</mat-checkbox>
-        <mat-slider
-        thumbLabel
-        tickInterval="1"
-        step="1"
-        min="0"
-        max="4"
-        aria-label="units"
-      ></mat-slider>
+        <!-- <div class="slider-container">
+            <mat-label>Filter By Price</mat-label>
+            <div class="price-options">
+                <div>$</div>
+                <div>$$</div>
+                <div>$$$</div>
+                <div>$$$$</div>
+            </div>
+                <mat-slider
+                thumbLabel
+                tickInterval="1"
+                step="1"
+                min="0"
+                max="3"
+                aria-label="units"
+            ></mat-slider>
+        </div> -->
         <div class="button-container">
             <button class="submit-button" type="submit" mat-raised-button mat-button [disabled]="!preferencesForm.valid">Search</button>
             <button (click)="resetForm()" class="reset-button" mat-raised-button>Clear</button>

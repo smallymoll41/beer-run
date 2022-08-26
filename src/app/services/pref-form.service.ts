@@ -10,4 +10,5 @@ export class PrefFormService {
   formChangedSubject: Subject<Preferences> = new Subject();
 
   constructor() { }
+
 }

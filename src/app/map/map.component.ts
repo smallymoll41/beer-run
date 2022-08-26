@@ -55,7 +55,10 @@ export class MapComponent implements OnInit {
     });
 
     this.formChanged = this.prefFormService.formChangedSubject.subscribe((formVals: Preferences) => {
-      //was throwing error so I had to make it a string then parse 
+      //was throwing error so I had to make it a string then parse
+      if (formVals.preferredRadius === null) {
+        this.resetMarkers();
+      } 
       this.radius = parseFloat(formVals.preferredRadius * this.metersToMilesMultiplier + "");
       formVals.openNow;
       this.getNearbyBar(this.radius, formVals.openNow, this.center);
@@ -80,7 +83,7 @@ export class MapComponent implements OnInit {
         this.map.panTo(point);
       },
       (error) => {
-        //add actual error message
+        console.log("Could Not Find User Location " + error);
       },
       { enableHighAccuracy: true }
     );
@@ -125,6 +128,10 @@ export class MapComponent implements OnInit {
       const currentPoint =  new google.maps.LatLng(point);
       this.markers.push(currentPoint);
     });
+  }
+
+  resetMarkers(){
+    this.markers = [];
   }
 
 }
